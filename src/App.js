@@ -9,10 +9,14 @@ import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import Book from './components/Book/Book';
 import Header from './components/Header/Header';
+import AuthProvder from './context/AuthProvder';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import Orders from './components/Orders/Orders';
 
 function App() {
   return (
-      <Router>
+      <AuthProvder>
+          <Router>
           <Header/>
           <Switch>
             <Route path="/home">
@@ -21,14 +25,21 @@ function App() {
             <Route path="/login">
               <Login />
             </Route>
-            <Route path="/book/:bedType">
+            <PrivateRoute path="/book/:bedType">
               <Book />
-            </Route>
+            </PrivateRoute>
+            <PrivateRoute path="/book">
+              <Book />
+            </PrivateRoute>
+            <PrivateRoute path="/orders">
+              <Orders />
+            </PrivateRoute>
             <Route exact path="/">
               <Home />
             </Route>
           </Switch>
-      </Router>
+         </Router>
+      </AuthProvder>
   );
 }
 
